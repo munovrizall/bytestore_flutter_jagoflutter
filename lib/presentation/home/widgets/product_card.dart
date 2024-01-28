@@ -1,6 +1,9 @@
+import 'package:byte_store/core/constants/variables.dart';
+import 'package:byte_store/data/models/responses/product_response_model.dart';
+import 'package:byte_store/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 
 import '../../../core/components/spaces.dart';
 import '../../../core/core.dart';
@@ -8,7 +11,7 @@ import '../../../core/router/app_router.dart';
 import '../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductModel data;
+  final Product data;
   const ProductCard({super.key, required this.data});
 
   @override
@@ -41,8 +44,10 @@ class ProductCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
-                  child: Image.asset(
-                    data.images.first,
+                  child: Image.network(
+                    data.image!.contains('http')
+                        ? data.image!
+                        : '${Variables.baseUrlImage}${data.image}',
                     width: 170.0,
                     height: 112.0,
                     fit: BoxFit.cover,
@@ -51,7 +56,7 @@ class ProductCard extends StatelessWidget {
                 const SpaceHeight(14.0),
                 Flexible(
                   child: Text(
-                    data.name,
+                    data.name!,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -59,7 +64,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data.priceFormat,
+                  data.price!.currencyFormatRp,
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -72,7 +77,9 @@ class ProductCard extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<CheckoutBloc>().add(CheckoutEvent.addItem(data));
+              },
               icon: Container(
                 padding: const EdgeInsets.all(4.0),
                 decoration: BoxDecoration(

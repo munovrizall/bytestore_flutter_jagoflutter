@@ -1,6 +1,11 @@
 import 'package:byte_store/core/constants/colors.dart';
 import 'package:byte_store/data/datasources/category_remote_datasource.dart';
+import 'package:byte_store/data/datasources/product_remote_datasource.dart';
+import 'package:byte_store/presentation/home/bloc/all_product/all_product_bloc.dart';
+import 'package:byte_store/presentation/home/bloc/best_seller_product/best_seller_product_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/category/category_bloc.dart';
+import 'package:byte_store/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:byte_store/presentation/home/bloc/special_offer_product/special_offer_product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,8 +23,24 @@ class MyApp extends StatelessWidget {
     final appRouter = AppRouter();
     final router = appRouter.router;
 
-    return BlocProvider(
-      create: (context) => CategoryBloc(CategoryRemoteDatasource()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoryBloc(CategoryRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => AllProductBloc(ProductRemoteDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => BestSellerProductBloc(ProductRemoteDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => SpecialOfferProductBloc(ProductRemoteDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutBloc()
+        ),
+      ],
       child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(

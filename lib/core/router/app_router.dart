@@ -72,11 +72,11 @@ class AppRouter {
       //         return ProductDetailPage(data: args);
       //       },
       //     ),
-      //     GoRoute(
-      //       name: RouteConstants.cart,
-      //       path: RouteConstants.cartPath,
-      //       builder: (context, state) => const CartPage(),
-      //     ),
+          // GoRoute(
+          //   name: RouteConstants.cart,
+          //   path: RouteConstants.cartPath,
+          //   builder: (context, state) => const CartPage(),
+          // ),
       //     GoRoute(
       //       name: RouteConstants.address,
       //       path: RouteConstants.addressPath,
