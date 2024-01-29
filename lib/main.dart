@@ -1,6 +1,9 @@
 import 'package:byte_store/core/constants/colors.dart';
+import 'package:byte_store/data/datasources/auth_remote_datasource.dart';
 import 'package:byte_store/data/datasources/category_remote_datasource.dart';
 import 'package:byte_store/data/datasources/product_remote_datasource.dart';
+import 'package:byte_store/presentation/auth/bloc/login/login_bloc.dart';
+import 'package:byte_store/presentation/auth/bloc/logout/logout_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/best_seller_product/best_seller_product_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/category/category_bloc.dart';
@@ -40,8 +43,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CheckoutBloc()
         ),
+        BlocProvider(
+          create: (context) => LoginBloc(AuthRemoteDatasource())
+        ),
+        BlocProvider(
+          create: (context) => LogoutBloc(AuthRemoteDatasource())
+        ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),

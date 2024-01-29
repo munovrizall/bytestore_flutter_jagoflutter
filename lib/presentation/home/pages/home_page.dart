@@ -62,6 +62,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Byte Store'),
         actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Assets.icons.notification.svg(height: 24),
+          ),
           BlocBuilder<CheckoutBloc, CheckoutState>(
             builder: (context, state) {
               return state.maybeWhen(
@@ -101,9 +105,8 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Assets.icons.notification.svg(height: 24),
+          const SizedBox(
+            width: 16,
           ),
         ],
       ),

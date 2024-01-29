@@ -2,6 +2,8 @@
 import 'package:byte_store/core/assets/assets.gen.dart';
 import 'package:byte_store/core/constants/colors.dart';
 import 'package:byte_store/presentation/home/pages/home_page.dart';
+import 'package:byte_store/presentation/home/pages/logout_page.dart';
+import 'package:byte_store/presentation/orders/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -22,14 +24,12 @@ class _DashboardPageState extends State<DashboardPage> {
       child: HomePage(),
     ),
     const Center(
-      child: Text('This page 2'),
+      child: CartPage(),
     ),
     const Center(
       child: Text('This page 3'),
     ),
-    const Center(
-      child: Text('This page 4'),
-    ),
+    const LogoutPage()
   ];
 
   void _onItemTapped(int index) {
@@ -67,16 +67,6 @@ class _DashboardPageState extends State<DashboardPage> {
             label: 'HOME',
           ),
           BottomNavigationBarItem(
-            icon: Assets.icons.search.svg(
-              colorFilter: const ColorFilter.mode(
-                AppColors.grey,
-                BlendMode.srcIn,
-              ),
-            ),
-            activeIcon: Assets.icons.search.svg(),
-            label: 'EXPLORE',
-          ),
-          BottomNavigationBarItem(
             icon: Assets.icons.order.svg(
               colorFilter: const ColorFilter.mode(
                 AppColors.grey,
@@ -85,6 +75,16 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             activeIcon: Assets.icons.order.svg(),
             label: 'ORDER',
+          ),
+          BottomNavigationBarItem(
+            icon: Assets.icons.search.svg(
+              colorFilter: const ColorFilter.mode(
+                AppColors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
+            activeIcon: Assets.icons.search.svg(),
+            label: 'EXPLORE',
           ),
           BottomNavigationBarItem(
             icon: Assets.icons.person.svg(
