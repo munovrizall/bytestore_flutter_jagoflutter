@@ -21,14 +21,19 @@ class _LogoutPageState extends State<LogoutPage> {
           state.maybeWhen(
             orElse: () {},
             loaded: () {
-              context.goNamed(RouteConstants.root,
-                  pathParameters: PathParameters().toMap());
+              context.goNamed(
+                RouteConstants.root,
+                pathParameters: PathParameters().toMap(),
+              );
             },
             error: (message) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(message),
-                backgroundColor: Colors.red,
-              ));
+              context.goNamed(
+                RouteConstants.login,
+              );
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //   content: Text(message),
+              //   backgroundColor: Colors.red,
+              // ));
             },
           );
         },

@@ -1,7 +1,15 @@
 import 'package:byte_store/core/constants/colors.dart';
+import 'package:byte_store/data/datasources/address_remote_datasource.dart';
 import 'package:byte_store/data/datasources/auth_remote_datasource.dart';
 import 'package:byte_store/data/datasources/category_remote_datasource.dart';
 import 'package:byte_store/data/datasources/product_remote_datasource.dart';
+import 'package:byte_store/data/datasources/rajaongkir_remote_datasource.dart';
+import 'package:byte_store/data/models/responses/subdistrict_response_model.dart';
+import 'package:byte_store/presentation/address/bloc/add_address/add_address_bloc.dart';
+import 'package:byte_store/presentation/address/bloc/address/address_bloc.dart';
+import 'package:byte_store/presentation/address/bloc/city/city_bloc.dart';
+import 'package:byte_store/presentation/address/bloc/province/province_bloc.dart';
+import 'package:byte_store/presentation/address/bloc/subdistrict/subdistrict_bloc.dart';
 import 'package:byte_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:byte_store/presentation/auth/bloc/logout/logout_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/all_product/all_product_bloc.dart';
@@ -48,6 +56,21 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LogoutBloc(AuthRemoteDatasource())
+        ),
+        BlocProvider(
+          create: (context) => AddressBloc(AddressRemoteDataSource())
+        ),
+        BlocProvider(
+          create: (context) => AddAddressBloc(AddressRemoteDataSource())
+        ),
+        BlocProvider(
+          create: (context) => ProvinceBloc(RajaongkirRemoteDatasource())
+        ),
+        BlocProvider(
+          create: (context) => CityBloc(RajaongkirRemoteDatasource())
+        ),
+        BlocProvider(
+          create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource())
         ),
       ],
       child: MaterialApp.router(
