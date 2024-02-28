@@ -2,6 +2,7 @@ import 'package:byte_store/core/constants/colors.dart';
 import 'package:byte_store/data/datasources/address_remote_datasource.dart';
 import 'package:byte_store/data/datasources/auth_remote_datasource.dart';
 import 'package:byte_store/data/datasources/category_remote_datasource.dart';
+import 'package:byte_store/data/datasources/order_remote_datasource.dart';
 import 'package:byte_store/data/datasources/product_remote_datasource.dart';
 import 'package:byte_store/data/datasources/rajaongkir_remote_datasource.dart';
 import 'package:byte_store/data/models/responses/subdistrict_response_model.dart';
@@ -17,6 +18,10 @@ import 'package:byte_store/presentation/home/bloc/best_seller_product/best_selle
 import 'package:byte_store/presentation/home/bloc/category/category_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:byte_store/presentation/home/bloc/special_offer_product/special_offer_product_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/cost/cost_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/history_order/history_order_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/order/order_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/status_order/status_order_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,6 +77,24 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource())
         ),
+        BlocProvider(
+          create: (context) => CostBloc(RajaongkirRemoteDatasource())
+        ),
+        // BlocProvider(
+        //   create: (context) => TrackingBloc(RajaongkirRemoteDatasource()),
+        // ),
+        BlocProvider(
+          create: (context) => OrderBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => StatusOrderBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => HistoryOrderBloc(OrderRemoteDatasource()),
+        ),
+        // BlocProvider(
+        //   create: (context) => OrderDetailBloc(OrderRemoteDatasource()),
+        // ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

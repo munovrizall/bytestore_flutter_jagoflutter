@@ -20,6 +20,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
 
+  /// File path: assets/icons/copy.svg
+  SvgGenImage get copy => const SvgGenImage('assets/icons/copy.svg');
+
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
 
@@ -39,6 +42,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/person.svg
   SvgGenImage get person => const SvgGenImage('assets/icons/person.svg');
 
+  /// File path: assets/icons/routing.svg
+  SvgGenImage get routing => const SvgGenImage('assets/icons/routing.svg');
+
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
@@ -50,12 +56,14 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         cart,
         clock,
+        copy,
         email,
         home,
         notification,
         order,
         password,
         person,
+        routing,
         search,
         shieldDone
       ];

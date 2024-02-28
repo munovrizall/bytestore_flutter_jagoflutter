@@ -8,6 +8,8 @@ import 'package:byte_store/presentation/home/pages/dashboard_page.dart';
 import 'package:byte_store/presentation/intro/splash_screen.dart';
 import 'package:byte_store/presentation/orders/pages/cart_page.dart';
 import 'package:byte_store/presentation/orders/pages/order_detail_page.dart';
+import 'package:byte_store/presentation/orders/pages/payment_detail_page.dart';
+import 'package:byte_store/presentation/orders/pages/payment_waiting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,6 +77,42 @@ class AppRouter {
                 name: RouteConstants.orderDetail,
                 path: RouteConstants.orderDetailPath,
                 builder: (context, state) => const OrderDetailPage(),
+                routes: [
+                  GoRoute(
+                    name: RouteConstants.paymentDetail,
+                    path: RouteConstants.paymentDetailPath,
+                    builder: (context, state) => const PaymentDetailPage(),
+                    routes: [
+                      GoRoute(
+                        name: RouteConstants.paymentWaiting,
+                        path: RouteConstants.paymentWaitingPath,
+                        builder: (context, state) {
+                          final args = state.extra as int;
+                          return PaymentWaitingPage(orderId: args);
+                        },
+                      ),
+                      // GoRoute(
+                      //   name: RouteConstants.trackingOrder,
+                      //   path: RouteConstants.trackingOrderPath,
+                      //   builder: (context, state) {
+                      //     final args = state.extra as int;
+                      //     return TrackingOrderPage(orderId: args);
+                      //   } ,
+                      //   routes: [
+                      //     GoRoute(
+                      //       name: RouteConstants.shippingDetail,
+                      //       path: RouteConstants.shippingDetailPath,
+                      //       builder: (context, state) {
+                      //         final args = state.extra as String;
+                      //         return ShippingDetailPage(resi: args);
+                      //       }
+                      //           ,
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
+                  ),
+                ]
                 // routes: [
                 //   GoRoute(
                 //     name: RouteConstants.paymentDetail,
