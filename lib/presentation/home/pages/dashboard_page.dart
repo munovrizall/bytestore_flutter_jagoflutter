@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:byte_store/core/assets/assets.gen.dart';
 import 'package:byte_store/core/constants/colors.dart';
+import 'package:byte_store/presentation/account/pages/account_page.dart';
 import 'package:byte_store/presentation/home/pages/home_page.dart';
 import 'package:byte_store/presentation/home/pages/logout_page.dart';
 import 'package:byte_store/presentation/orders/pages/cart_page.dart';
@@ -29,7 +30,7 @@ class _DashboardPageState extends State<DashboardPage> {
     const Center(
       child: Text('This page 3'),
     ),
-    const LogoutPage()
+    const AccountPage(),
   ];
 
   void _onItemTapped(int index) {

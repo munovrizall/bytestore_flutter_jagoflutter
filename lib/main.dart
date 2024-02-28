@@ -22,7 +22,9 @@ import 'package:byte_store/presentation/home/bloc/special_offer_product/special_
 import 'package:byte_store/presentation/orders/bloc/cost/cost_bloc.dart';
 import 'package:byte_store/presentation/orders/bloc/history_order/history_order_bloc.dart';
 import 'package:byte_store/presentation/orders/bloc/order/order_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/order_detail/order_detail_bloc.dart';
 import 'package:byte_store/presentation/orders/bloc/status_order/status_order_bloc.dart';
+import 'package:byte_store/presentation/orders/bloc/tracking/tracking_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,24 +65,36 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               SpecialOfferProductBloc(ProductRemoteDataSource()),
         ),
-        BlocProvider(create: (context) => CheckoutBloc()),
-        BlocProvider(create: (context) => LoginBloc(AuthRemoteDatasource())),
-        BlocProvider(create: (context) => LogoutBloc(AuthRemoteDatasource())),
         BlocProvider(
-            create: (context) => AddressBloc(AddressRemoteDataSource())),
+          create: (context) => CheckoutBloc(),
+        ),
         BlocProvider(
-            create: (context) => AddAddressBloc(AddressRemoteDataSource())),
+          create: (context) => LoginBloc(AuthRemoteDatasource()),
+        ),
         BlocProvider(
-            create: (context) => ProvinceBloc(RajaongkirRemoteDatasource())),
+          create: (context) => LogoutBloc(AuthRemoteDatasource()),
+        ),
         BlocProvider(
-            create: (context) => CityBloc(RajaongkirRemoteDatasource())),
+          create: (context) => AddressBloc(AddressRemoteDataSource()),
+        ),
         BlocProvider(
-            create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource())),
+          create: (context) => AddAddressBloc(AddressRemoteDataSource()),
+        ),
         BlocProvider(
-            create: (context) => CostBloc(RajaongkirRemoteDatasource())),
-        // BlocProvider(
-        //   create: (context) => TrackingBloc(RajaongkirRemoteDatasource()),
-        // ),
+          create: (context) => ProvinceBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => CityBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => CostBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => TrackingBloc(RajaongkirRemoteDatasource()),
+        ),
         BlocProvider(
           create: (context) => OrderBloc(OrderRemoteDatasource()),
         ),
@@ -90,9 +104,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HistoryOrderBloc(OrderRemoteDatasource()),
         ),
-        // BlocProvider(
-        //   create: (context) => OrderDetailBloc(OrderRemoteDatasource()),
-        // ),
+        BlocProvider(
+          create: (context) => OrderDetailBloc(OrderRemoteDatasource()),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

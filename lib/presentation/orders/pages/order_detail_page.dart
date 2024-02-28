@@ -1,14 +1,21 @@
-import 'package:byte_store/core/assets/assets.gen.dart';
-import 'package:byte_store/core/components/buttons.dart';
-import 'package:byte_store/core/components/spaces.dart';
+import 'package:byte_store/core/constants/colors.dart';
 import 'package:byte_store/core/core.dart';
-import 'package:byte_store/core/router/app_router.dart';
-import 'package:byte_store/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:byte_store/presentation/orders/bloc/cost/cost_bloc.dart';
-import 'package:byte_store/presentation/orders/widgets/cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:byte_store/core/core.dart';
+import 'package:byte_store/presentation/orders/bloc/cost/cost_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../core/assets/assets.gen.dart';
+import '../../../core/components/buttons.dart';
+import '../../../core/components/spaces.dart';
+import '../../../core/router/app_router.dart';
+import '../../home/bloc/checkout/checkout_bloc.dart';
+import '../../home/models/product_model.dart';
+import '../../home/models/store_model.dart';
+import '../models/shipping_model.dart';
+import '../widgets/cart_tile.dart';
 
 class OrderDetailPage extends StatefulWidget {
   const OrderDetailPage({super.key});
@@ -20,7 +27,7 @@ class OrderDetailPage extends StatefulWidget {
 class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
   void initState() {
-    context.read<CostBloc>().add(const CostEvent.getCost(
+    context.read<CostBloc>().add(CostEvent.getCost(
           origin: '5779',
           destination: '2103',
           weight: 1000,
@@ -53,19 +60,23 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         children: [
           BlocBuilder<CheckoutBloc, CheckoutState>(
             builder: (context, state) {
-              return state.maybeWhen(orElse: () {
-                return const SizedBox();
-              }, loaded: (products, _, __, ___, ____, _____) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) => CartTile(
-                    data: products[index],
-                  ),
-                  separatorBuilder: (context, index) => const SpaceHeight(16.0),
-                );
-              });
+              return state.maybeWhen(
+                orElse: () {
+                  return const SizedBox();
+                },
+                loaded: (products, _, __, ___, ____, _____) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) => CartTile(
+                      data: products[index],
+                    ),
+                    separatorBuilder: (context, index) =>
+                        const SpaceHeight(16.0),
+                  );
+                },
+              );
             },
           ),
           const SpaceHeight(36.0),
@@ -271,7 +282,7 @@ class _SelectShippingState extends State<_SelectShipping> {
                     ),
                   ],
                 ),
-                // const SpaceHeight(18.0),
+                const SpaceHeight(18.0),
                 // Container(
                 //   decoration: ShapeDecoration(
                 //     shape: RoundedRectangleBorder(
@@ -304,7 +315,7 @@ class _SelectShippingState extends State<_SelectShipping> {
                 //     fontWeight: FontWeight.w600,
                 //   ),
                 // ),
-                const SpaceHeight(30.0),
+                // const SpaceHeight(30.0),
                 const Divider(color: AppColors.stroke),
                 BlocBuilder<CostBloc, CostState>(
                   builder: (context, state) {

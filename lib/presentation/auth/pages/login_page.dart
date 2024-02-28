@@ -1,4 +1,5 @@
 import 'package:byte_store/data/datasources/auth_local_datasource.dart';
+import 'package:byte_store/data/datasources/firebase_messanging_remote_datasource.dart';
 import 'package:byte_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,8 +83,9 @@ class _LoginPageState extends State<LoginPage> {
               listener: (context, state) {
                 state.maybeWhen(
                   orElse: () {},
-                  loaded: (data) {
+                  loaded: (data) async {
                     AuthLocalDatasource().saveAuthData(data);
+                    await FirebaseMessagingRemoteDatasource().initialize();
                     context.goNamed(RouteConstants.root,
                         pathParameters: PathParameters().toMap());
                   },
