@@ -2,6 +2,7 @@ import 'package:byte_store/core/constants/colors.dart';
 import 'package:byte_store/data/datasources/address_remote_datasource.dart';
 import 'package:byte_store/data/datasources/auth_remote_datasource.dart';
 import 'package:byte_store/data/datasources/category_remote_datasource.dart';
+import 'package:byte_store/data/datasources/firebase_messanging_remote_datasource.dart';
 import 'package:byte_store/data/datasources/order_remote_datasource.dart';
 import 'package:byte_store/data/datasources/product_remote_datasource.dart';
 import 'package:byte_store/data/datasources/rajaongkir_remote_datasource.dart';
@@ -27,7 +28,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/router/app_router.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessagingRemoteDatasource().initialize();
   runApp(const MyApp());
 }
 
@@ -51,35 +60,24 @@ class MyApp extends StatelessWidget {
           create: (context) => BestSellerProductBloc(ProductRemoteDataSource()),
         ),
         BlocProvider(
-          create: (context) => SpecialOfferProductBloc(ProductRemoteDataSource()),
+          create: (context) =>
+              SpecialOfferProductBloc(ProductRemoteDataSource()),
         ),
+        BlocProvider(create: (context) => CheckoutBloc()),
+        BlocProvider(create: (context) => LoginBloc(AuthRemoteDatasource())),
+        BlocProvider(create: (context) => LogoutBloc(AuthRemoteDatasource())),
         BlocProvider(
-          create: (context) => CheckoutBloc()
-        ),
+            create: (context) => AddressBloc(AddressRemoteDataSource())),
         BlocProvider(
-          create: (context) => LoginBloc(AuthRemoteDatasource())
-        ),
+            create: (context) => AddAddressBloc(AddressRemoteDataSource())),
         BlocProvider(
-          create: (context) => LogoutBloc(AuthRemoteDatasource())
-        ),
+            create: (context) => ProvinceBloc(RajaongkirRemoteDatasource())),
         BlocProvider(
-          create: (context) => AddressBloc(AddressRemoteDataSource())
-        ),
+            create: (context) => CityBloc(RajaongkirRemoteDatasource())),
         BlocProvider(
-          create: (context) => AddAddressBloc(AddressRemoteDataSource())
-        ),
+            create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource())),
         BlocProvider(
-          create: (context) => ProvinceBloc(RajaongkirRemoteDatasource())
-        ),
-        BlocProvider(
-          create: (context) => CityBloc(RajaongkirRemoteDatasource())
-        ),
-        BlocProvider(
-          create: (context) => SubdistrictBloc(RajaongkirRemoteDatasource())
-        ),
-        BlocProvider(
-          create: (context) => CostBloc(RajaongkirRemoteDatasource())
-        ),
+            create: (context) => CostBloc(RajaongkirRemoteDatasource())),
         // BlocProvider(
         //   create: (context) => TrackingBloc(RajaongkirRemoteDatasource()),
         // ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "829546711384",
+    "project_id": "byte-store",
+    "storage_bucket": "byte-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829546711384:android:2c9ddc655e364092357d2d",
+        "android_client_info": {
+          "package_name": "com.example.byte_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA05hOf_rvrhPd1NPlT8Y8MNam0gWgRw5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
